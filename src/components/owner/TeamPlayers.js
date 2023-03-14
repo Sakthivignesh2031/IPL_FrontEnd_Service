@@ -15,7 +15,7 @@ function TeamPlayers(props) {
     const { id } = useParams();
 
     const viewPlayers = async () => {
-        const result = await axios.get(baseUrl.owner + `/api/teamPlayer/${id}`);
+        const result = await axios.get(baseUrl + `/api/teamPlayer/${id}`);
         setPlayers(result.data);
     }
 

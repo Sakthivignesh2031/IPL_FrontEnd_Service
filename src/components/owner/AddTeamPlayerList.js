@@ -3,7 +3,9 @@ import axios from 'axios'
 import { useParams, useLocation } from 'react-router-dom'
 
 import baseUrl from '../../api/baseUrl';
+import useThunk from '../../redux/hooks/use-thunk';
 
+import { addTeamPlayer } from '../../redux/store/store'
 function AddTeamPlayerList(props) {
 
     const [players, setPlayers] = useState([])
@@ -16,8 +18,14 @@ function AddTeamPlayerList(props) {
 
     const foreign = location.state.data.foreign
 
+    // const [viewPlayers] = useThunk();
 
 
+    // useEffect(() => {
+    //     viewPlayers(addTeamPlayer).then((result) => {
+    //         setPlayers(result.data.filter(e => e.team === null))
+    //     })
+    // }, [])
 
     useEffect(() => {
         viewPlayers()
@@ -25,7 +33,7 @@ function AddTeamPlayerList(props) {
 
 
     const viewPlayers = async () => {
-        const result = await axios.get(baseUrl.owner + `/api/players`);
+        const result = await axios.get(baseUrl + `/api/players`);
         setPlayers(result.data.filter(e => e.team === null));
     }
 
@@ -34,12 +42,12 @@ function AddTeamPlayerList(props) {
         if (totalPlayers < 15) {
             if (foreign !== true) {
                 if (foreign < 6) {
-                    await axios.post(baseUrl.owner + `/api/teamPlayer/${teamId}/${playerId}`)
+                    await axios.post(baseUrl + `/api/teamPlayer/${teamId}/${playerId}`)
                     viewPlayers()
                 }
             }
             else {
-                await axios.post(baseUrl.owner + `/api/teamPlayer/${teamId}/${playerId}`)
+                await axios.post(baseUrl + `/api/teamPlayer/${teamId}/${playerId}`)
                 viewPlayers()
             }
         }

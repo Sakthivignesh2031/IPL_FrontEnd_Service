@@ -17,8 +17,8 @@ function EditTeam() {
 
     useEffect(() => {
         dispatch(getTeamDetailsById(teamId))
-            .then((response) => {
-                setTeam(response.payload);
+            .then((result) => {
+                setTeam(result.payload);
             })
     }, [])
 

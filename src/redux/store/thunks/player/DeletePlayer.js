@@ -3,7 +3,7 @@ import axios from 'axios';
 import BaseUrl from '../../../../api/baseUrl';
 
 const deletePlayer = createAsyncThunk('player/delete', async (player) => {
-    await axios.delete(BaseUrl.admin + `/player/${player.playerId}`);
+    await axios.delete(BaseUrl + `/api/player/${player.playerId}`);
     return player;
 })
 

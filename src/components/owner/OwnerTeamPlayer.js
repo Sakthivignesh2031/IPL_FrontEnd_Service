@@ -3,21 +3,28 @@ import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
 import baseUrl from '../../api/baseUrl';
 import OwnerTeamPlayerShow from './OwnerTeamPlayerShow'
+import { useDispatch } from 'react-redux';
+import { ownerTeamPlayers, removePlayer } from '../../redux/store/store';
+import useThunk from '../../redux/hooks/use-thunk';
+
 
 function OwnerTeamPlayer(props) {
     const [players, setPlayers] = useState([])
 
+    const { teamId } = useParams();
+    const [deletePlayer] = useThunk(removePlayer)
+    const dispatch = useDispatch();
+
     useEffect(() => {
-        viewPlayers();
+        dispatch(ownerTeamPlayers(teamId)).then((result) => {
+            setPlayers(result.payload)
+        })
     }, []);
 
-    const { teamId } = useParams();
-
-    const viewPlayers = async () => {
-        const result = await axios.get(baseUrl.owner + `/api/teamPlayer/${teamId}`);
-        setPlayers(result.data);
+    const handleRemovePlayer = (player) => {
+        deletePlayer(player);
+        window.location.reload(false);
     }
-
 
     const sort = () => {
         let totalPlayers = players.length
@@ -29,26 +36,25 @@ function OwnerTeamPlayer(props) {
         return data
     }
 
-    const removePlayer = async (playerId) => {
-        await axios.delete(baseUrl.owner + `/api/teamPlayer/${playerId}`)
-        viewPlayers()
-    }
+    // const removePlayer = async (playerId) => {
+    //     await axios.delete(baseUrl.owner + `/api/teamPlayer/${playerId}`)
+    //     ownerTeamPlayers()
+    // }
     const playerList = players.map((player, index) => {
-        return <OwnerTeamPlayerShow key={index} player={player} onDelete={removePlayer} />;
+        return <OwnerTeamPlayerShow key={index} player={player} onDelete={handleRemovePlayer} />;
     })
 
     return (
 
         <div className='container'>
-            <hr />
+            <br />
             <div className='d-flex justify-content-between'>
-                <Link className='btn btn-outline-primary' state={{ data: sort() }} to={`/addplayerList/${teamId}`}>Add Player</Link>
-                <Link className='btn btn-outline-danger' to={`/ownerhome/${teamId}`}>Back</Link>
+                <Link className='btn btn-dark' state={{ data: sort() }} to={`/addplayerList/${teamId}`}>Add Player</Link>
             </div>
             <hr />
             <div className='row'>
                 <div className='col-12'>
-                    <h2 className='font-weight-bol text-center text-success'>Owner Team Players</h2>
+                    <h2 className='font-weight-bol text-center text-white'>Owner Team Players</h2>
                     <hr />
                 </div>
             </div>

@@ -4,7 +4,7 @@ import BaseUrl from '../../../../api/baseUrl';
 
 
 const fetchTeam = createAsyncThunk('team/fetch', async () => {
-    const response = await axios.get(BaseUrl.admin + `/teams`);
+    const response = await axios.get(BaseUrl + `/api/teams`);
     return response.data;
 });
 

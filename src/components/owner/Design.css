@@ -1,0 +1,20 @@
+.Text-Color-1 {
+    color: rgb(16, 30, 189);
+    font-family: cursive;
+    font-size: 40px;
+    font-weight: 900;
+}
+
+.Text-Color-2 {
+    color: rgb(3, 75, 28);
+    font-family: cursive;
+    font-size: 40px;
+    font-weight: 900;
+}
+
+.Text-Color-3 {
+    color: rgb(13, 9, 97);
+    font-family: sans-serif;
+    font-size: 40px;
+    font-weight: bold;
+}

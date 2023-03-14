@@ -16,7 +16,7 @@ function Team() {
 
     useEffect(() => {
         doFetchTeam()
-    }, [doFetchTeam]);
+    }, []);
 
     const handleTeamDelete = (team) => {
         doDeleteTeam(team);

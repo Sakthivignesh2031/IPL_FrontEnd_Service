@@ -5,6 +5,7 @@ import * as Yup from "yup";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 
+
 export default function Login() {
 
     const [ownername, setOwnername] = useState()
@@ -53,11 +54,13 @@ export default function Login() {
 
     return (
         <div className="img">
-            <nav className="navbar navbar-expand-lg navbar-dark bg-secondary justify-content-between text-white font-weight-bol fixed-top">
-                <img src='https://www.iplt20.com/assets/images/ipl-logo-new-old.png' alt='logo' height={70} />
-                <h2> IPL Dashboard </h2>
-                <Link className='btn btn-primary btn-lg' to='/login'>Login</Link>
-            </nav>
+            <div>
+                <nav className="navbar navbar-expand-lg navbar-dark bg-secondary justify-content-between text-white font-weight-bol fixed-top">
+                    <img src='https://www.iplt20.com/assets/images/ipl-logo-new-old.png' alt='logo' height={70} />
+                    <h2> IPL Dashboard </h2>
+                    <Link className='btn btn-primary btn-lg' to='/login'>Login</Link>
+                </nav>
+            </div>
             <div className='container ' >
                 <div className="row">
                     <div className='col-md-6 offset-md-3 border rounded p-4 mt-2 shadow'>

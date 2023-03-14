@@ -1,49 +1,50 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import axios from 'axios';
-import baseUrl from '../../api/baseUrl';
+import { useSelector, useDispatch } from "react-redux";
+import useThunk from '../../redux/hooks/use-thunk';
+import { fetchTeam } from '../../redux/store/store';
+import { getTeamId } from '../../redux/store/store';
+import './Design.css';
 
 function OwnerHome() {
 
     const { ownername } = useParams();
+
     const [id, setId] = useState([]);
-    const [teams, setTeams] = useState([])
+
+    const [viewTeams] = useThunk(fetchTeam);
+    const dispatch = useDispatch();
+
+    const { data } = useSelector((state) => {
+        return state.team;
+    });
 
     useEffect(() => {
-        loadTeam()
-    }, [])
+        viewTeams()
+    }, [viewTeams])
 
     useEffect(() => {
-        getid()
+        dispatch(getTeamId(ownername)).then((result) => {
+            setId(result.payload)
+        })
     }, [])
-
-    const loadTeam = async () => {
-        const result = await axios.get(baseUrl.owner + `/api/teams`);
-        setTeams(result.data);
-    }
-
-    const getid = async () => {
-        const teamResult = await axios.get(baseUrl.owner + `/api/getId/${ownername}`);
-        console.log(teamResult.data)
-        setId(teamResult.data)
-    }
 
     return (
         <div>
             <hr />
-            <h2 className='font-weight-bol text-center text-primary'>Owner Team</h2>
+            <h2 className='font-weight-bol text-center Text-Color-1'>Owner Team</h2>
             <hr />
             <div className='container'>
-                <div className='card card-header '>
-                    <div className='d-flex justify-content-around' key={teams.teamId}>
-                        {teams.map((team) => {
+                <div className='card card-header bg-info'>
+                    <div className='d-flex justify-content-around' key={data.teamId}>
+                        {data.map((team) => {
                             if (team.teamId === id.teamId) {
                                 return <div>
-                                    <h2 className='text-danger' >{team.teamName} </h2>
+                                    <h2 className='Text-Color-3' >{team.teamName} </h2>
                                 </div>
                             }
                         })}
-                        <Link className='btn btn-danger mx-2' to={`/teamplayer/${id.teamId}`} >
+                        <Link className='btn btn-dark btn-lg' to={`/teamplayer/${id.teamId}`} >
                             TeamPlayerDetails </Link>
                     </div>
                 </div>
@@ -51,11 +52,11 @@ function OwnerHome() {
                 <div className='row'>
                     <div className='col-12'>
                         <hr />
-                        <h2 className='font-weight-bol text-center text-success'>Other Team Details</h2>
+                        <h2 className='font-weight-bol text-center Text-Color-2'>Other Team Details</h2>
                         <hr />
                         <table className="table border shadow table-striped ">
-                            <thead>
-                                <tr>
+                            <thead >
+                                <tr className='table-dark'>
                                     <th scope='col'>Team Name</th>
                                     <th scope='col'>Team City</th>
                                     <th scope='col'>Team State</th>
@@ -65,10 +66,10 @@ function OwnerHome() {
                             </thead>
 
                             <tbody>
-                                {teams.map((team) => {
+                                {data.map((team) => {
                                     if (team.teamId !== id.teamId) {
                                         return (
-                                            <tr>
+                                            <tr className='table-info'>
                                                 <td>{team.teamName}</td>
                                                 <td>{team.teamCity}</td>
                                                 <td>{team.teamState}</td>
@@ -88,10 +89,9 @@ function OwnerHome() {
                         </table>
                     </div>
                 </div>
-                <Link className='btn btn-danger' to={"/owner"}>Back</Link>
             </div>
             <hr />
-        </div>
+        </div >
     );
 }
 
