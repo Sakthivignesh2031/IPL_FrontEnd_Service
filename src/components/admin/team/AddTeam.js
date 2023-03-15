@@ -5,11 +5,12 @@ import { Link } from 'react-router-dom';
 import { addTeam } from '../../../redux/store/store';
 import useThunk from '../../../redux/hooks/use-thunk';
 
-function AddTeam(props) {
+function AddTeam() {
 
-    const dispatch = useDispatch();
     const navigate = useNavigate();
-    const [doAddTeam, isCreatingTeam, creatingTeamError] = useThunk(addTeam);
+
+    const [doAddTeam] = useThunk(addTeam);
+
     const [team, setTeam] = useState({
         teamName: "",
         teamCity: "",
@@ -18,16 +19,50 @@ function AddTeam(props) {
         email: "",
         password: ""
     })
+
     const { teamName, teamCity, teamState, ownerName, email, password } = team;
 
     const onInputChange = (e) => {
         setTeam({ ...team, [e.target.name]: e.target.value });
     }
 
+    const [formError, setFormError] = useState({})
+
+    const validationForm = () => {
+
+        let err = {}
+
+        if (team.teamName === '') {
+            err.teamName = 'Team Name is Required...!'
+        }
+        if (team.teamState === '') {
+            err.teamState = 'Team State is Required...!'
+        }
+        if (team.teamCity === '') {
+            err.teamCity = 'Team City is Required...!'
+        }
+        if (team.ownerName === '') {
+            err.ownerName = 'Owner Name is Required...!'
+        }
+        if (team.email === '') {
+            err.email = 'E-mail is Required...!'
+        }
+        if (team.password === '') {
+            err.password = 'Password is Required...!'
+        }
+
+        setFormError({ ...err })
+
+        return Object.keys(err).length < 1;
+    }
+
     const onSubmit = (e) => {
         e.preventDefault();
-        doAddTeam(team)
-        navigate('/team');
+        let isValid = validationForm()
+        if (isValid) {
+            doAddTeam(team)
+            navigate('/team');
+        }
     }
 
     return (
@@ -54,6 +89,8 @@ function AddTeam(props) {
                                     value={teamName}
                                     onChange={(e) => onInputChange(e)}
                                 />
+                                <span className='text-danger'>{formError.teamName}</span>
+                                <br />
                                 <label className='d-flex justify-content-around'>Team City:</label><br />
                                 <input
                                     className='form-control'
@@ -63,6 +100,8 @@ function AddTeam(props) {
                                     value={teamCity}
                                     onChange={(e) => onInputChange(e)}
                                 />
+                                <span className='text-danger'>{formError.teamCity}</span>
+                                <br />
                                 <label className='d-flex justify-content-around'>Team State:</label><br />
                                 <input
                                     className='form-control'
@@ -72,6 +111,8 @@ function AddTeam(props) {
                                     value={teamState}
                                     onChange={(e) => onInputChange(e)}
                                 />
+                                <span className='text-danger'>{formError.teamState}</span>
+                                <br />
                                 <label className='d-flex justify-content-around'> Owner Name:</label><br />
                                 <input
                                     className='form-control'
@@ -81,6 +122,8 @@ function AddTeam(props) {
                                     value={ownerName}
                                     onChange={(e) => onInputChange(e)}
                                 />
+                                <span className='text-danger'>{formError.ownerName}</span>
+                                <br />
                                 <label className='d-flex justify-content-around'> Email:</label><br />
                                 <input
                                     className='form-control'
@@ -90,6 +133,8 @@ function AddTeam(props) {
                                     value={email}
                                     onChange={(e) => onInputChange(e)}
                                 />
+                                <span className='text-danger'>{formError.email}</span>
+                                <br />
                                 <label className='d-flex justify-content-around'> TempPassword:</label><br />
                                 <input
                                     className='form-control'
@@ -99,15 +144,18 @@ function AddTeam(props) {
                                     value={password}
                                     onChange={(e) => onInputChange(e)}
                                 />
+                                <span className='text-danger'>{formError.password}</span>
                                 <br />
-                                <button type='submit' className='btn btn-primary'>Submit</button>
-                                <Link className='btn btn-danger mx-2' to="/team">Cancel</Link>
+                                <hr />
+                                <div className='d-flex justify-content-around'>
+                                    <button type='submit' className='btn btn-primary'>Submit</button>
+                                    <Link className='btn btn-danger mx-2' to="/team">Cancel</Link>
+                                </div>
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
     );
 }

@@ -8,14 +8,14 @@ import { Link, useNavigate } from "react-router-dom";
 
 export default function Login() {
 
+    const navigate = useNavigate();
+
     const [ownername, setOwnername] = useState()
 
     const onInputChange = (e) => {
         setOwnername(e.target.value)
     }
 
-
-    const navigate = useNavigate();
     const validationSchema = Yup.object().shape({
         username: Yup.string()
             .required("Username is required")
@@ -38,13 +38,13 @@ export default function Login() {
     });
 
     const onSubmit = async (data) => {
+
         const payload = { userName: data.username, userPassword: data.password };
+
         const result = await axios.post(
             "http://localhost:8081/authenticate",
             payload
         );
-        // navigate("/QuestionBank");
-        console.log(result);
         if (result?.data?.user?.role[0]?.roleName === "Owner") {
             navigate(`/owner/${ownername}`);
         } else {
@@ -90,7 +90,7 @@ export default function Login() {
                                         />
                                         <div className="invalid-feedback">{errors.password?.message}</div>
                                     </div>
-
+                                    <hr />
                                     <div className="form-group">
                                         <div className="d-flex justify-content-around">
                                             <button type="submit" className="btn btn-primary mt-2">
@@ -107,7 +107,6 @@ export default function Login() {
                     </div>
                 </div>
             </div>
-
         </div>
     );
 }

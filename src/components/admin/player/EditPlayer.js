@@ -32,11 +32,42 @@ function EditPlayer() {
             })
     }, [])
 
+    const [formError, setFormError] = useState({})
+
+    const validationForm = () => {
+
+        let err = {}
+
+        if (player.name === '') {
+            err.name = 'Player name is Required...!'
+        }
+        if (player.age === '') {
+            err.age = 'Player age is Required...!'
+        }
+        if (player.imageUrl === '') {
+            err.imageUrl = 'Player imageUrl is Required...!'
+        }
+        if (player.speciality === '') {
+            err.speciality = 'Player speciality is Required...!'
+        }
+        if (player.foreign === '') {
+            err.foreign = 'Player isForeign is Required...!'
+        }
+
+        setFormError({ ...err })
+
+        return Object.keys(err).length < 1;
+    }
+
     const onSubmit = async (e) => {
-        e.preventDefault()
-        dispatch(updatePlayer(player))
-        navigate('/player')
-        window.location.reload(false);
+        e.preventDefault();
+        let isValid = validationForm()
+
+        if (isValid) {
+            dispatch(updatePlayer(player))
+            navigate('/player')
+            window.location.reload(false);
+        }
     }
     return (
         <div className='container'>
@@ -49,11 +80,8 @@ function EditPlayer() {
                         </h1>
                     </div>
                     <div className='card-body '>
-
                         <div className='mb-3'>
-
                             <form onSubmit={(e) => onSubmit(e)}>
-
 
                                 <label className='d-flex justify-content-around'>Player Name:</label><br />
                                 <input
@@ -63,7 +91,8 @@ function EditPlayer() {
                                     placeholder='Enter Player Name'
                                     value={name}
                                     onChange={(e) => onInputChange(e)}
-                                /><br />
+                                /><span className='text-danger'>{formError.name}</span>
+                                <br />
 
                                 <label className='d-flex justify-content-around'>Player age:</label><br />
                                 <input
@@ -73,7 +102,9 @@ function EditPlayer() {
                                     placeholder='Enter Player age'
                                     value={age}
                                     onChange={(e) => onInputChange(e)}
-                                /><br />
+                                />
+                                <span className='text-danger'>{formError.age}</span>
+                                <br />
 
                                 <label className='d-flex justify-content-around'>Player Image URL:</label><br />
                                 <input
@@ -83,7 +114,9 @@ function EditPlayer() {
                                     placeholder='Enter your Player Image URL'
                                     value={imageUrl}
                                     onChange={(e) => onInputChange(e)}
-                                /><br />
+                                />
+                                <span className='text-danger'>{formError.imageUrl}</span>
+                                <br />
 
                                 <label className='d-flex justify-content-around'> Player Speciality:</label><br />
                                 <input
@@ -93,7 +126,9 @@ function EditPlayer() {
                                     placeholder='Enter Player speciality'
                                     value={speciality}
                                     onChange={(e) => onInputChange(e)}
-                                /><br />
+                                />
+                                <span className='text-danger'>{formError.speciality}</span>
+                                <br />
 
                                 <label className='d-flex justify-content-around'> IsForeign:</label><br />
                                 <input
@@ -103,7 +138,9 @@ function EditPlayer() {
                                     placeholder='Enter Player IsForeign'
                                     value={foreign}
                                     onChange={(e) => onInputChange(e)}
-                                /><br />
+                                />
+                                <span className='text-danger'>{formError.foreign}</span>
+                                <br />
 
                                 <label className='d-flex justify-content-around'> PLayer IsAvailable:</label><br />
                                 <input
@@ -114,10 +151,12 @@ function EditPlayer() {
                                     value={available}
                                     onChange={(e) => onInputChange(e)}
                                 /><br />
+                                <hr />
 
-                                <button type='submit' className='btn btn-primary'>Submit</button>
-
-                                <Link className='btn btn-danger mx-2' to="/player">Cancel</Link>
+                                <div className='d-flex justify-content-around'>
+                                    <button type='submit' className='btn btn-primary'>Submit</button>
+                                    <Link className='btn btn-danger mx-2' to="/player">Cancel</Link>
+                                </div>
                             </form>
                         </div>
                     </div>

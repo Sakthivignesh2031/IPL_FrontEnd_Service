@@ -9,7 +9,6 @@ function Team() {
     const [doFetchTeam] = useThunk(fetchTeam);
     const [doDeleteTeam] = useThunk(deleteTeam);
 
-
     const { data } = useSelector((state) => {
         return state.team;
     });

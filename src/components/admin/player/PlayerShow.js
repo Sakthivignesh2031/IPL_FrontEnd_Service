@@ -3,9 +3,6 @@ import { Link } from 'react-router-dom';
 import './PlayerShow.css';
 
 function PlayerShow({ player, onDelete }) {
-
-
-
     return (
 
         <div className='player-show'>

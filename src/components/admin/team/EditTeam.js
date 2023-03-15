@@ -7,12 +7,15 @@ function EditTeam() {
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
+
     const { teamId } = useParams()
+
     const [team, setTeam] = useState({
         teamName: "",
         teamCity: "",
         teamState: ""
     });
+
     const { teamName, teamCity, teamState } = team;
 
     useEffect(() => {
@@ -26,12 +29,44 @@ function EditTeam() {
         setTeam({ ...team, [e.target.name]: e.target.value });
     }
 
+    const [formError, setFormError] = useState({})
+
+    const validationForm = () => {
+
+        let err = {}
+
+        if (team.teamName === '') {
+            err.teamName = 'Team Name is Required...!'
+        }
+        if (team.teamState === '') {
+            err.teamState = 'Team State is Required...!'
+        }
+        if (team.teamCity === '') {
+            err.teamCity = 'Team City is Required...!'
+        }
+        if (team.ownerName === '') {
+            err.ownerName = 'Owner Name is Required...!'
+        }
+        if (team.email === '') {
+            err.email = 'E-mail is Required...!'
+        }
+        if (team.password === '') {
+            err.password = 'Password is Required...!'
+        }
+
+        setFormError({ ...err })
+
+        return Object.keys(err).length < 1;
+    }
+
     const onSubmit = async (e) => {
         e.preventDefault()
-        dispatch(updateTeam(team))
-        navigate('/team')
-        window.location.reload(false);
-
+        let isValid = validationForm()
+        if (isValid) {
+            dispatch(updateTeam(team))
+            navigate('/team')
+            window.location.reload(false);
+        }
     }
     return (
         <div className='container'>
@@ -44,12 +79,8 @@ function EditTeam() {
                         </h1>
                     </div>
                     <div className='card-body '>
-
                         <div className='mb-3'>
-
                             <form onSubmit={(e) => onSubmit(e)}>
-
-
                                 <label className='d-flex justify-content-around'>Team Name:</label><br />
                                 <input
                                     className='form-control'
@@ -58,7 +89,8 @@ function EditTeam() {
                                     placeholder='Enter your Team Name'
                                     value={teamName}
                                     onChange={(e) => onInputChange(e)}
-                                /><br />
+                                /><span className='text-danger'>{formError.teamName}</span>
+                                <br />
 
                                 <label className='d-flex justify-content-around'>Team City:</label><br />
                                 <input
@@ -68,7 +100,8 @@ function EditTeam() {
                                     placeholder='Enter your Team Name'
                                     value={teamCity}
                                     onChange={(e) => onInputChange(e)}
-                                /><br />
+                                /><span className='text-danger'>{formError.teamCity}</span>
+                                <br />
 
                                 <label className='d-flex justify-content-around'>Team State:</label><br />
                                 <input
@@ -78,12 +111,14 @@ function EditTeam() {
                                     placeholder='Enter your Team State'
                                     value={teamState}
                                     onChange={(e) => onInputChange(e)}
-                                /><br />
+                                /><span className='text-danger'>{formError.teamState}</span>
+                                <br />
+                                <hr />
 
-
-                                <button type='submit' className='btn btn-primary'>Submit</button>
-
-                                <Link className='btn btn-danger mx-2' to="/team">Cancel</Link>
+                                <div className='d-flex justify-content-around'>
+                                    <button type='submit' className='btn btn-primary'>Submit</button>
+                                    <Link className='btn btn-danger mx-2' to="/team">Cancel</Link>
+                                </div>
                             </form>
                         </div>
                     </div>

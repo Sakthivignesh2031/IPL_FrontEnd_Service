@@ -7,7 +7,9 @@ import { addPlayer } from '../../../redux/store/store';
 function AddPlayer(props) {
 
     const navigate = useNavigate();
+
     const [doAddPlayer] = useThunk(addPlayer);
+
     const [player, setPlayer] = useState({
         name: "",
         age: "",
@@ -21,11 +23,43 @@ function AddPlayer(props) {
     const onInputChange = (e) => {
         setPlayer({ ...player, [e.target.name]: e.target.value });
     }
+
+    const [formError, setFormError] = useState({})
+
+    const validationForm = () => {
+
+        let err = {}
+
+        if (player.name === '') {
+            err.name = 'Player name is Required...!'
+        }
+        if (player.age === '') {
+            err.age = 'Player age is Required...!'
+        }
+        if (player.imageUrl === '') {
+            err.imageUrl = 'Player imageUrl is Required...!'
+        }
+        if (player.speciality === '') {
+            err.speciality = 'Player speciality is Required...!'
+        }
+        if (player.foreign === '') {
+            err.foreign = 'Player isForeign is Required...!'
+        }
+
+        setFormError({ ...err })
+
+        return Object.keys(err).length < 1;
+    }
+
     const onSubmit = (e) => {
         e.preventDefault();
-        doAddPlayer(player)
-        navigate('/player');
-        window.location.reload(false);
+
+        let isValid = validationForm()
+        if (isValid) {
+            doAddPlayer(player)
+            navigate('/player');
+            window.location.reload(false);
+        }
     }
     return (
         <div className='container'>
@@ -39,9 +73,7 @@ function AddPlayer(props) {
                         </h1>
                     </div>
                     <div className='card-body '>
-
                         <div className='mb-3'>
-
                             <form onSubmit={onSubmit}>
 
                                 <label className='d-flex justify-content-around'>Player Name:</label><br />
@@ -53,7 +85,8 @@ function AddPlayer(props) {
                                     value={name}
                                     onChange={(e) => onInputChange(e)}
                                 />
-
+                                <span className='text-danger'>{formError.name}</span>
+                                <br />
 
                                 <label className='d-flex justify-content-around'>Player age:</label><br />
                                 <input
@@ -64,6 +97,8 @@ function AddPlayer(props) {
                                     value={age}
                                     onChange={(e) => onInputChange(e)}
                                 />
+                                <span className='text-danger'>{formError.age}</span>
+                                <br />
 
                                 <label className='d-flex justify-content-around'> Player Speciality:</label><br />
                                 <input
@@ -74,7 +109,8 @@ function AddPlayer(props) {
                                     value={speciality}
                                     onChange={(e) => onInputChange(e)}
                                 />
-
+                                <span className='text-danger'>{formError.speciality}</span>
+                                <br />
 
                                 <label className='d-flex justify-content-around'> Player IsForeign</label><br />
                                 <input
@@ -85,6 +121,8 @@ function AddPlayer(props) {
                                     value={foreign}
                                     onChange={(e) => onInputChange(e)}
                                 />
+                                <span className='text-danger'>{formError.foreign}</span>
+                                <br />
 
                                 <label className='d-flex justify-content-around'> Image URL</label><br />
                                 <input
@@ -95,11 +133,14 @@ function AddPlayer(props) {
                                     value={imageUrl}
                                     onChange={(e) => onInputChange(e)}
                                 />
+                                <span className='text-danger'>{formError.imageUrl}</span>
+                                <br />
+                                <hr />
 
-
-                                <button type='submit' className='btn btn-primary'>Submit</button>
-
-                                <Link className='btn btn-danger mx-2' to="/player">Cancel</Link>
+                                <div className='d-flex justify-content-around'>
+                                    <button type='submit' className='btn btn-primary'>Submit</button>
+                                    <Link className='btn btn-danger mx-2' to="/player">Cancel</Link>
+                                </div>
                             </form>
                         </div>
                     </div>
