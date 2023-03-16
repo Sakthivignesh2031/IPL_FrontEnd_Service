@@ -81,7 +81,7 @@ function EditTeam() {
                     <div className='card-body '>
                         <div className='mb-3'>
                             <form onSubmit={(e) => onSubmit(e)}>
-                                <label className='d-flex justify-content-around'>Team Name:</label><br />
+                                <label className='d-flex justify-content-around'>Team Name</label><br />
                                 <input
                                     className='form-control'
                                     type='text'
@@ -92,7 +92,7 @@ function EditTeam() {
                                 /><span className='text-danger'>{formError.teamName}</span>
                                 <br />
 
-                                <label className='d-flex justify-content-around'>Team City:</label><br />
+                                <label className='d-flex justify-content-around'>Team City</label><br />
                                 <input
                                     className='form-control'
                                     type='text'
@@ -103,7 +103,7 @@ function EditTeam() {
                                 /><span className='text-danger'>{formError.teamCity}</span>
                                 <br />
 
-                                <label className='d-flex justify-content-around'>Team State:</label><br />
+                                <label className='d-flex justify-content-around'>Team State</label><br />
                                 <input
                                     className='form-control'
                                     type='text'

@@ -3,9 +3,7 @@ import axios from 'axios'
 import { useParams, useLocation } from 'react-router-dom'
 
 import baseUrl from '../../api/baseUrl';
-import useThunk from '../../redux/hooks/use-thunk';
 
-import { addTeamPlayer } from '../../redux/store/store'
 function AddTeamPlayerList(props) {
 
     const [players, setPlayers] = useState([])
@@ -16,16 +14,7 @@ function AddTeamPlayerList(props) {
 
     const totalPlayers = location.state.data.total
 
-    const foreign = location.state.data.foreign
-
-    // const [viewPlayers] = useThunk();
-
-
-    // useEffect(() => {
-    //     viewPlayers(addTeamPlayer).then((result) => {
-    //         setPlayers(result.data.filter(e => e.team === null))
-    //     })
-    // }, [])
+    // const foreign = location.state.data.foreign
 
     useEffect(() => {
         viewPlayers()
@@ -60,13 +49,13 @@ function AddTeamPlayerList(props) {
             <div className='row'>
                 <div className='col-12'>
                     <hr />
-                    <h2 className='font-weight-bol text-center text-success'>Player List</h2>
+                    <h2 className='font-weight-bol text-center text-white'>Player List</h2>
 
                     <hr />
 
                     <table className="table border shadow table-striped ">
                         <thead>
-                            <tr>
+                            <tr className='table-dark'>
                                 <th scope='col'>Image</th>
                                 <th scope='col'>Player ID</th>
                                 <th scope='col'>PLayer Name</th>
@@ -79,8 +68,8 @@ function AddTeamPlayerList(props) {
                         <tbody>
 
                             {players.map((player) => (
-                                <tr>
-                                    <td><img src={player.imageUrl} width="50" height="50" /></td>
+                                <tr className='bg-light'>
+                                    <td><img src={player.imageUrl} width="50" height="50" alt='player' /></td>
                                     <td>{player.playerId}</td>
                                     <td>{player.name}</td>
                                     <td>{player.age}</td>

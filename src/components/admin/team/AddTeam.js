@@ -80,7 +80,7 @@ function AddTeam() {
                         <div className='mb-3'>
 
                             <form onSubmit={onSubmit}>
-                                <label className='d-flex justify-content-around'>Team Name:</label><br />
+                                <label className='d-flex justify-content-around'>Team Name</label><br />
                                 <input
                                     className='form-control'
                                     type='text'
@@ -91,7 +91,7 @@ function AddTeam() {
                                 />
                                 <span className='text-danger'>{formError.teamName}</span>
                                 <br />
-                                <label className='d-flex justify-content-around'>Team City:</label><br />
+                                <label className='d-flex justify-content-around'>Team City</label><br />
                                 <input
                                     className='form-control'
                                     type='text'
@@ -102,7 +102,7 @@ function AddTeam() {
                                 />
                                 <span className='text-danger'>{formError.teamCity}</span>
                                 <br />
-                                <label className='d-flex justify-content-around'>Team State:</label><br />
+                                <label className='d-flex justify-content-around'>Team State</label><br />
                                 <input
                                     className='form-control'
                                     type='text'
@@ -113,7 +113,7 @@ function AddTeam() {
                                 />
                                 <span className='text-danger'>{formError.teamState}</span>
                                 <br />
-                                <label className='d-flex justify-content-around'> Owner Name:</label><br />
+                                <label className='d-flex justify-content-around'> Owner Name</label><br />
                                 <input
                                     className='form-control'
                                     type='text'
@@ -124,7 +124,7 @@ function AddTeam() {
                                 />
                                 <span className='text-danger'>{formError.ownerName}</span>
                                 <br />
-                                <label className='d-flex justify-content-around'> Email:</label><br />
+                                <label className='d-flex justify-content-around'> Email</label><br />
                                 <input
                                     className='form-control'
                                     type='text'
@@ -135,12 +135,12 @@ function AddTeam() {
                                 />
                                 <span className='text-danger'>{formError.email}</span>
                                 <br />
-                                <label className='d-flex justify-content-around'> TempPassword:</label><br />
+                                <label className='d-flex justify-content-around'> Password</label><br />
                                 <input
                                     className='form-control'
                                     type='password'
                                     name='password'
-                                    placeholder='Enter your TempPassword'
+                                    placeholder='Enter your Password'
                                     value={password}
                                     onChange={(e) => onInputChange(e)}
                                 />

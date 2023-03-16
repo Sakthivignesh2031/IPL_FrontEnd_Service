@@ -83,7 +83,7 @@ function EditPlayer() {
                         <div className='mb-3'>
                             <form onSubmit={(e) => onSubmit(e)}>
 
-                                <label className='d-flex justify-content-around'>Player Name:</label><br />
+                                <label className='d-flex justify-content-around'>Player Name</label><br />
                                 <input
                                     className='form-control'
                                     type='text'
@@ -94,7 +94,7 @@ function EditPlayer() {
                                 /><span className='text-danger'>{formError.name}</span>
                                 <br />
 
-                                <label className='d-flex justify-content-around'>Player age:</label><br />
+                                <label className='d-flex justify-content-around'>Player age</label><br />
                                 <input
                                     className='form-control'
                                     type='text'
@@ -106,7 +106,7 @@ function EditPlayer() {
                                 <span className='text-danger'>{formError.age}</span>
                                 <br />
 
-                                <label className='d-flex justify-content-around'>Player Image URL:</label><br />
+                                <label className='d-flex justify-content-around'>Player Image URL</label><br />
                                 <input
                                     className='form-control'
                                     type='text'
@@ -118,7 +118,7 @@ function EditPlayer() {
                                 <span className='text-danger'>{formError.imageUrl}</span>
                                 <br />
 
-                                <label className='d-flex justify-content-around'> Player Speciality:</label><br />
+                                <label className='d-flex justify-content-around'> Player Speciality</label><br />
                                 <input
                                     className='form-control'
                                     type='text'
@@ -130,7 +130,7 @@ function EditPlayer() {
                                 <span className='text-danger'>{formError.speciality}</span>
                                 <br />
 
-                                <label className='d-flex justify-content-around'> IsForeign:</label><br />
+                                <label className='d-flex justify-content-around'> IsForeign</label><br />
                                 <input
                                     className='form-control'
                                     type='text'
@@ -142,7 +142,7 @@ function EditPlayer() {
                                 <span className='text-danger'>{formError.foreign}</span>
                                 <br />
 
-                                <label className='d-flex justify-content-around'> PLayer IsAvailable:</label><br />
+                                <label className='d-flex justify-content-around'> PLayer IsAvailable</label><br />
                                 <input
                                     className='form-control'
                                     type='text'

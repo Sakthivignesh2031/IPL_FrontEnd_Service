@@ -76,7 +76,7 @@ function AddPlayer(props) {
                         <div className='mb-3'>
                             <form onSubmit={onSubmit}>
 
-                                <label className='d-flex justify-content-around'>Player Name:</label><br />
+                                <label className='d-flex justify-content-around'>Player Name</label><br />
                                 <input
                                     className='form-control'
                                     type='text'
@@ -88,7 +88,7 @@ function AddPlayer(props) {
                                 <span className='text-danger'>{formError.name}</span>
                                 <br />
 
-                                <label className='d-flex justify-content-around'>Player age:</label><br />
+                                <label className='d-flex justify-content-around'>Player age</label><br />
                                 <input
                                     className='form-control'
                                     type='text'
@@ -100,7 +100,7 @@ function AddPlayer(props) {
                                 <span className='text-danger'>{formError.age}</span>
                                 <br />
 
-                                <label className='d-flex justify-content-around'> Player Speciality:</label><br />
+                                <label className='d-flex justify-content-around'> Player Speciality</label><br />
                                 <input
                                     className='form-control'
                                     type='text'

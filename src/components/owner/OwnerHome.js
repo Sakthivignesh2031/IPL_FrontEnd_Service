@@ -69,7 +69,7 @@ function OwnerHome() {
                                 {data.map((team) => {
                                     if (team.teamId !== id.teamId) {
                                         return (
-                                            <tr className='table-info'>
+                                            <tr className='table-info' key={team.teamName}>
                                                 <td>{team.teamName}</td>
                                                 <td>{team.teamCity}</td>
                                                 <td>{team.teamState}</td>

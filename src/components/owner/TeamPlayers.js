@@ -22,7 +22,7 @@ function TeamPlayers(props) {
     return (
         <div>
             <hr />
-            <h2 className='font-weight-bol text-center text-success'>Other Team Player's</h2>
+            <h1 className='font-weight-bol text-center text-dark'><b>Other Team Player's</b></h1>
             <hr />
             <div className='container'>
                 <div className='row'>
@@ -42,9 +42,9 @@ function TeamPlayers(props) {
 
                             <tbody>
                                 {players.map((player, index) => (
-                                    <tr className='table-success'>
-                                        <th scope='row' key={index}>{index + 1}</th>
-                                        <td><img src={player.imageUrl} width="50" height="50" /></td>
+                                    <tr className='table-success' key={player.playerId}>
+                                        <th scope='row' >{index + 1}</th>
+                                        <td><img src={player.imageUrl} width="50" height="50" alt='player' /></td>
                                         <td>{player.playerId}</td>
                                         <td>{player.name}</td>
                                         <td>{player.age}</td>
