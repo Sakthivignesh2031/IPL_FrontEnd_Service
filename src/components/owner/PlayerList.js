@@ -14,7 +14,7 @@ function AddTeamPlayerList(props) {
 
     const totalPlayers = location.state.data.total
 
-    // const foreign = location.state.data.foreign
+    const foreign = location.state.data.foreign
 
     useEffect(() => {
         viewPlayers()

@@ -14,7 +14,7 @@ import EditPlayer from './components/admin/player/EditPlayer';
 import OwnerHome from './components/owner/OwnerHome';
 import OwnerTeamPlayer from './components/owner/OwnerTeamPlayer';
 import TeamPlayers from './components/owner/TeamPlayers';
-import AddTeamPlayerList from './components/owner/AddTeamPlayerList';
+import PlayerList from './components/owner/PlayerList';
 
 function App() {
   return (
@@ -33,7 +33,7 @@ function App() {
         <Route path="/owner/:ownername" element={<OwnerHome />} />
         <Route path="/teamplayer/:teamId" element={<OwnerTeamPlayer />} />
         <Route path="/teamPlayers/:id" element={<TeamPlayers />} />
-        <Route path="/addplayerList/:teamId" element={<AddTeamPlayerList />} />
+        <Route path="/addplayerList/:teamId" element={<PlayerList />} />
       </Routes>
     </div>
   );
