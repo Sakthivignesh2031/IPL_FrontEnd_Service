@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from "react-redux";
 import { Link } from 'react-router-dom';
 import { fetchTeam, deleteTeam } from '../../../redux/store/store'
@@ -8,6 +8,7 @@ function Team() {
 
     const [doFetchTeam] = useThunk(fetchTeam);
     const [doDeleteTeam] = useThunk(deleteTeam);
+    const isDeleted = useState(false);
 
     const { data } = useSelector((state) => {
         return state.team;
@@ -17,8 +18,14 @@ function Team() {
         doFetchTeam()
     }, []);
 
+
+
     const handleTeamDelete = (team) => {
-        doDeleteTeam(team);
+        const confirmed = window.confirm('Are you sure you want to delete this Team?');
+        if (confirmed) {
+            doDeleteTeam(team);
+            isDeleted(true)
+        }
     }
 
     return (

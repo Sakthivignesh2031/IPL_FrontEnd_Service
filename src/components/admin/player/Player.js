@@ -9,6 +9,7 @@ function Player(props) {
 
     const [doFetchPlayer] = useThunk(fetchPlayer);
     const [doDeletePlayer] = useThunk(deletePlayer);
+    const isDeleted = useState(false);
 
     const { data } = useSelector((state) => {
         return state.player;
@@ -19,7 +20,11 @@ function Player(props) {
     }, [doFetchPlayer]);
 
     const handlePlayerDelete = (player) => {
-        doDeletePlayer(player);
+        const confirmed = window.confirm('Are you sure you want to delete this Player?');
+        if (confirmed) {
+            doDeletePlayer(player);
+            isDeleted(true)
+        }
     }
 
     const playerList = data.map((player, index) => {

@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
-import baseUrl from '../../api/baseUrl';
 import OwnerTeamPlayerShow from './OwnerTeamPlayerShow'
 import { useDispatch } from 'react-redux';
 import { ownerTeamPlayers, removePlayer } from '../../redux/store/store';
@@ -13,6 +11,7 @@ function OwnerTeamPlayer(props) {
 
     const { teamId } = useParams();
     const [deletePlayer] = useThunk(removePlayer)
+    const isDeleted = useState(false);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -22,8 +21,12 @@ function OwnerTeamPlayer(props) {
     }, []);
 
     const handleRemovePlayer = (player) => {
-        deletePlayer(player);
-        window.location.reload(false);
+        const confirmed = window.confirm('Are you sure..!! Do you want to Remove this Player ?');
+        if (confirmed) {
+            deletePlayer(player);
+            window.location.reload(true);
+            isDeleted(true)
+        }
     }
 
     const sort = () => {
@@ -36,10 +39,6 @@ function OwnerTeamPlayer(props) {
         return data
     }
 
-    // const removePlayer = async (playerId) => {
-    //     await axios.delete(baseUrl.owner + `/api/teamPlayer/${playerId}`)
-    //     ownerTeamPlayers()
-    // }
     const playerList = players.map((player, index) => {
         return <OwnerTeamPlayerShow key={index} player={player} onDelete={handleRemovePlayer} />;
     })
