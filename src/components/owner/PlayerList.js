@@ -68,7 +68,7 @@ function AddTeamPlayerList(props) {
                         <tbody>
 
                             {players.map((player) => (
-                                <tr className='bg-light'>
+                                <tr className='bg-light' key={player.playerId}>
                                     <td><img src={player.imageUrl} width="50" height="50" alt='player' /></td>
                                     <td>{player.playerId}</td>
                                     <td>{player.name}</td>

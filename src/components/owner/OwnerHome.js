@@ -36,10 +36,10 @@ function OwnerHome() {
             <hr />
             <div className='container'>
                 <div className='card card-header bg-info'>
-                    <div className='d-flex justify-content-around' key={data.teamId}>
+                    <div className='d-flex justify-content-around' >
                         {data.map((team) => {
                             if (team.teamId === id.teamId) {
-                                return <div>
+                                return <div key={team.teamId}>
                                     <h2 className='Text-Color-3' >{team.teamName} </h2>
                                 </div>
                             }

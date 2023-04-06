@@ -65,7 +65,7 @@ function EditTeam() {
         if (isValid) {
             dispatch(updateTeam(team))
             navigate('/team')
-            window.location.reload(false);
+            window.location.reload(true);
         }
     }
     return (

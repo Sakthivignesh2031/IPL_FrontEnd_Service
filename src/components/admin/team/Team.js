@@ -18,8 +18,6 @@ function Team() {
         doFetchTeam()
     }, []);
 
-
-
     const handleTeamDelete = (team) => {
         const confirmed = window.confirm('Are you sure you want to delete this Team?');
         if (confirmed) {
